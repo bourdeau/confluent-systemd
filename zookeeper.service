@@ -1,0 +1,12 @@
+[Unit]
+Description=Apache Zookeeper
+After = network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+SyslogIdentifier=zookeeper
+ExecStart=/usr/bin/zookeeper-server-start -daemon /etc/kafka/zookeeper.properties
+ExecStop=/usr/bin/zookeeper-server-stop
+
+[Install]
+WantedBy=multi-user.target

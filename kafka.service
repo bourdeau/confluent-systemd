@@ -1,0 +1,15 @@
+[Unit]
+Description=Apache Kafka server (broker)
+Documentation=http://kafka.apache.org/documentation.html
+Requires=zookeeper.service network.target remote-fs.target
+After=zookeeper.service network.target remote-fs.target
+
+[Service]
+Type=forking
+SyslogIdentifier=kafka
+ExecStart=/usr/bin/kafka-server-start -daemon /etc/kafka/server.properties
+ExecStop=/usr/bin/kafka-server-stop
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

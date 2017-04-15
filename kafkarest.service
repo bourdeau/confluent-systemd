@@ -1,0 +1,15 @@
+[Unit]
+Description=Kafka REST service
+Documentation=http://docs.confluent.io/3.2.0/kafka-rest/docs/index.html
+Requires=kafka.service network.target remote-fs.target
+After=kafka.service network.target remote-fs.target
+
+[Service]
+Type=forking
+SyslogIdentifier=kafka-rest
+ExecStart=/usr/bin/kafka-rest-start -daemon /etc/kafka-rest/kafka-rest.properties
+ExecStop=/usr/bin/kafka-rest-stop
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
